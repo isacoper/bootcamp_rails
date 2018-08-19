@@ -17,12 +17,25 @@ class User < ApplicationRecord
 
   def following?(other_user)
   	#Checa se o usuário está seguindo outro
+  	following.include? other_user
+  
   end
 
   def follow!(other_user)
   	#Cria relacionamento entre usuário e outro
+  	#active_relationships.create(followed: other_user)
+  	following << other_user
   end
 
-  def unfollow(other_user)
+  def unfollow!(other_user)
+  	#Apaga relacionamento entre usuario e outro
+  	following.destroy(other_user)
+  end
+
+  def feed
+  	#Gera o feed para o usuário
+  	users_ids = following.pluck(:id)
+  	users_ids << self.id
+  	Tweet.where(user_id: users_ids).order(created_at: :desc)
   end
 end
