@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  follower: MyString
+  belongs_to: MyString
+  followed: one
+
+two:
+  follower: MyString
+  belongs_to: MyString
+  followed: two
