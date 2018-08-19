@@ -7,5 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 20.times do |n|
-	User.create(email: "user-numero#{n}@email.com", password: '123123')
+	user = User.create(email: "user-numero#{n}@email.com", password: '123123')
+	10.times do |nn|
+		user.tweets.create(content: "Hello #{nn}")
+	end
 end

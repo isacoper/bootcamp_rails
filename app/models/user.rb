@@ -31,4 +31,11 @@ class User < ApplicationRecord
   	#Apaga relacionamento entre usuario e outro
   	following.destroy(other_user)
   end
+
+  def feed
+  	#Gera o feed para o usuário
+  	users_ids = following.pluck(:id)
+  	users_ids << self.id
+  	Tweet.where(user_id: users_ids).order(created_at: :desc)
+  end
 end
